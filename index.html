@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic - Visual Discovery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Skeleton -->
+    <div id="loading-skeleton" class="loading-skeleton">
+        <div class="skeleton-header"></div>
+        <div class="skeleton-content">
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-heart"></i>
+                <span>Aesthetic</span>
+            </div>
+            
+            <div class="nav-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for inspiration..." id="search-input">
+                <div class="search-suggestions" id="search-suggestions"></div>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="nav-btn" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-btn" id="upload-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="nav-btn" id="notifications-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">3</span>
+                </button>
+                <div class="profile-menu">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRkU0RTEiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iI0ZGQkVENCIvPgo8cGF0aCBkPSJNMzAgMzJjMC00LjQxOC0zLjU4Mi04LTgtOGgtNGMtNC40MTggMC04IDMuNTgyLTggOHY0aDIwdi00eiIgZmlsbD0iI0ZGQkVENCIvPgo8L3N2Zz4K" alt="Profile" class="profile-avatar" id="profile-avatar">
+                    <div class="profile-dropdown" id="profile-dropdown">
+                        <a href="#" data-page="profile">My Profile</a>
+                        <a href="#" data-page="settings">Settings</a>
+                        <a href="#" id="logout-btn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Feed -->
+        <section class="page active" id="home-page">
+            <div class="page-header">
+                <h1>Discover</h1>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="aesthetic">Aesthetic</button>
+                    <button class="filter-btn" data-category="fashion">Fashion</button>
+                    <button class="filter-btn" data-category="travel">Travel</button>
+                    <button class="filter-btn" data-category="quotes">Quotes</button>
+                    <button class="filter-btn" data-category="design">Design</button>
+                    <button class="filter-btn" data-category="food">Food</button>
+                    <button class="filter-btn" data-category="nature">Nature</button>
+                </div>
+            </div>
+            
+            <div class="masonry-container" id="masonry-container">
+                <!-- Pins will be dynamically loaded here -->
+            </div>
+            
+            <div class="load-more">
+                <button id="load-more-btn">Load More</button>
+            </div>
+        </section>
+
+        <!-- Search Page -->
+        <section class="page" id="search-page">
+            <div class="page-header">
+                <h1>Search Results</h1>
+                <div class="search-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="pins">Pins</button>
+                    <button class="filter-btn" data-filter="people">People</button>
+                    <button class="filter-btn" data-filter="boards">Boards</button>
+                </div>
+            </div>
+            <div class="search-results" id="search-results">
+                <!-- Search results will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Collections Page -->
+        <section class="page" id="collections-page">
+            <div class="page-header">
+                <h1>My Collections</h1>
+                <button class="btn-primary" id="create-collection-btn">
+                    <i class="fas fa-plus"></i>
+                    Create Collection
+                </button>
+            </div>
+            <div class="collections-grid" id="collections-grid">
+                <!-- Collections will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Upload Page -->
+        <section class="page" id="upload-page">
+            <div class="upload-container">
+                <h1>Create Pin</h1>
+                <form class="upload-form" id="upload-form">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Choose a file or drag and drop it here</h3>
+                            <p>We recommend using high quality .jpg files less than 20MB</p>
+                        </div>
+                        <input type="file" id="file-input" accept="image/*" hidden>
+                    </div>
+                    
+                    <div class="upload-details">
+                        <div class="form-group">
+                            <label for="pin-title">Title</label>
+                            <input type="text" id="pin-title" placeholder="Add a title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pin-description">Description</label>
+                            <textarea id="pin-description" placeholder="Tell everyone what your pin is about"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pin-tags">Tags</label>
+                            <input type="text" id="pin-tags" placeholder="Add tags separated by commas">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pin-collection">Collection</label>
+                            <select id="pin-collection">
+                                <option value="">Choose a collection</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pin-source">Source URL (optional)</label>
+                            <input type="url" id="pin-source" placeholder="https://example.com">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancel-upload">Cancel</button>
+                            <button type="submit" class="btn-primary">Publish</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Profile Page -->
+        <section class="page" id="profile-page">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjRkZFNEUxIi8+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNDAiIHI9IjE1IiBmaWxsPSIjRkZCRUQ0Ii8+CjxwYXRoIGQ9Ik03NSA4MGMwLTExLjA0NS04Ljk1NS0yMC0yMC0yMEg0NWMtMTEuMDQ1IDAtMjAgOC45NTUtMjAgMjB2MTBoNTBWODB6IiBmaWxsPSIjRkZCRUQ0Ii8+Cjwvc3ZnPgo=" alt="Profile" class="profile-avatar-large">
+                    <div class="profile-details">
+                        <h1>Emma Johnson</h1>
+                        <p>@emmaj • Creative soul passionate about aesthetics</p>
+                        <div class="profile-stats">
+                            <span><strong>1.2k</strong> followers</span>
+                            <span><strong>847</strong> following</span>
+                            <span><strong>523</strong> pins</span>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-primary" id="edit-profile-btn">Edit Profile</button>
+                            <button class="btn-secondary" id="share-profile-btn">Share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="pins">Pins</button>
+                <button class="tab-btn" data-tab="collections">Collections</button>
+                <button class="tab-btn" data-tab="saved">Saved</button>
+                <button class="tab-btn" data-tab="likes">Likes</button>
+            </div>
+            
+            <div class="profile-content" id="profile-content">
+                <!-- Profile content will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Settings Page -->
+        <section class="page" id="settings-page">
+            <div class="settings-container">
+                <h1>Settings</h1>
+                
+                <div class="settings-section">
+                    <h2>Account Settings</h2>
+                    <div class="form-group">
+                        <label for="settings-username">Username</label>
+                        <input type="text" id="settings-username" value="emmaj">
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-email">Email</label>
+                        <input type="email" id="settings-email" value="emma@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-bio">Bio</label>
+                        <textarea id="settings-bio">Creative soul passionate about aesthetics</textarea>
+                    </div>
+                    <button class="btn-primary">Save Changes</button>
+                </div>
+                
+                <div class="settings-section">
+                    <h2>Appearance</h2>
+                    <div class="setting-item">
+                        <span>Theme</span>
+                        <div class="theme-toggle">
+                            <button class="theme-btn active" data-theme="light">Light</button>
+                            <button class="theme-btn" data-theme="dark">Dark</button>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <span>Language</span>
+                        <select id="language-select">
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                            <option value="de">Deutsch</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h2>Privacy & Security</h2>
+                    <div class="setting-item">
+                        <span>Email notifications</span>
+                        <label class="switch">
+                            <input type="checkbox" id="email-notifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>Newsletter</span>
+                        <label class="switch">
+                            <input type="checkbox" id="newsletter">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <button class="btn-secondary">Change Password</button>
+                </div>
+                
+                <div class="settings-section">
+                    <h2>Account Management</h2>
+                    <button class="btn-danger">Delete Account</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore Page -->
+        <section class="page" id="explore-page">
+            <div class="page-header">
+                <h1>Explore</h1>
+                <div class="explore-tabs">
+                    <button class="tab-btn active" data-tab="trending">Trending</button>
+                    <button class="tab-btn" data-tab="creators">Top Creators</button>
+                    <button class="tab-btn" data-tab="boards">Featured Boards</button>
+                </div>
+            </div>
+            <div class="explore-content" id="explore-content">
+                <!-- Explore content will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-page="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-item" data-page="search">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+        </button>
+        <button class="nav-item" data-page="upload">
+            <i class="fas fa-plus"></i>
+            <span>Create</span>
+        </button>
+        <button class="nav-item" data-page="collections">
+            <i class="fas fa-bookmark"></i>
+            <span>Saved</span>
+        </button>
+        <button class="nav-item" data-page="profile">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </button>
+    </nav>
+
+    <!-- Modals -->
+    <!-- Pin Modal -->
+    <div class="modal" id="pin-modal">
+        <div class="modal-content pin-modal-content">
+            <button class="modal-close" id="pin-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="pin-modal-body">
+                <div class="pin-image-container">
+                    <img src="" alt="" id="pin-modal-image">
+                </div>
+                <div class="pin-details">
+                    <div class="pin-actions">
+                        <button class="btn-primary" id="save-pin-btn">
+                            <i class="fas fa-bookmark"></i>
+                            Save
+                        </button>
+                        <button class="btn-secondary" id="share-pin-btn">
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                        <button class="btn-icon" id="copy-pin-btn">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <h2 id="pin-modal-title"></h2>
+                    <p id="pin-modal-description"></p>
+                    <div class="pin-tags" id="pin-modal-tags"></div>
+                    <div class="pin-author">
+                        <img src="" alt="" class="author-avatar">
+                        <span class="author-name"></span>
+                    </div>
+                    <div class="pin-comments" id="pin-comments">
+                        <h3>Comments</h3>
+                        <div class="comment-form">
+                            <input type="text" placeholder="Add a comment..." id="comment-input">
+                            <button class="btn-primary" id="add-comment-btn">Post</button>
+                        </div>
+                        <div class="comments-list" id="comments-list">
+                            <!-- Comments will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collection Modal -->
+    <div class="modal" id="collection-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="collection-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Create Collection</h2>
+            <form id="collection-form">
+                <div class="form-group">
+                    <label for="collection-name">Name</label>
+                    <input type="text" id="collection-name" placeholder="Give your collection a name">
+                </div>
+                <div class="form-group">
+                    <label for="collection-description">Description</label>
+                    <textarea id="collection-description" placeholder="What's your collection about?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="collection-private">
+                        <span>Keep this collection private</span>
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-collection">Cancel</button>
+                    <button type="submit" class="btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Save Pin Modal -->
+    <div class="modal" id="save-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="save-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Save to Collection</h2>
+            <div class="collections-list" id="save-collections-list">
+                <!-- Collections will be loaded here -->
+            </div>
+            <button class="btn-primary" id="create-new-collection">
+                <i class="fas fa-plus"></i>
+                Create New Collection
+            </button>
+        </div>
+    </div>
+
+    <!-- Notifications Modal -->
+    <div class="modal" id="notifications-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="notifications-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Notifications</h2>
+            <div class="notifications-list" id="notifications-list">
+                <!-- Notifications will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="auth-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="auth-content" id="auth-content">
+                <!-- Auth forms will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container">
+        <!-- Toast messages will appear here -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
