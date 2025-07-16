@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - Aesthetic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-heart"></i>
+                    <span>Aesthetic</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="search.html" class="nav-link active">Explore</a>
+                    <a href="upload.html" class="nav-link">Create</a>
+                </div>
+            </div>
+            <div class="nav-center">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for inspiration..." class="search-input" id="main-search">
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">3</span>
+                </button>
+                <div class="profile-menu">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMTAgMzBjMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMHMxMCA0LjQ3NyAxMCAxMHYySDEweiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K" alt="Profile" class="profile-avatar">
+                    <div class="dropdown-menu">
+                        <a href="profile.html">Profile</a>
+                        <a href="settings.html">Settings</a>
+                        <a href="auth.html">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Content -->
+    <main class="search-content">
+        <div class="search-header">
+            <div class="search-header-container">
+                <h1>Explore and Discover</h1>
+                <p>Find inspiration from millions of beautiful images</p>
+            </div>
+        </div>
+
+        <!-- Search Filters -->
+        <div class="search-filters">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label>Filter by:</label>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="tags">Tags</button>
+                        <button class="filter-btn" data-filter="people">People</button>
+                        <button class="filter-btn" data-filter="boards">Boards</button>
+                    </div>
+                </div>
+                
+                <div class="sort-group">
+                    <label>Sort by:</label>
+                    <select class="sort-select">
+                        <option value="relevance">Most Relevant</option>
+                        <option value="recent">Most Recent</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="saves">Most Saved</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trending Tags -->
+        <div class="trending-section">
+            <h2>Trending Now</h2>
+            <div class="trending-tags">
+                <button class="trending-tag" data-tag="minimalist">
+                    <i class="fas fa-fire"></i>
+                    minimalist
+                </button>
+                <button class="trending-tag" data-tag="aesthetic">
+                    <i class="fas fa-star"></i>
+                    aesthetic
+                </button>
+                <button class="trending-tag" data-tag="fashion">
+                    <i class="fas fa-heart"></i>
+                    fashion
+                </button>
+                <button class="trending-tag" data-tag="travel">
+                    <i class="fas fa-plane"></i>
+                    travel
+                </button>
+                <button class="trending-tag" data-tag="quotes">
+                    <i class="fas fa-quote-left"></i>
+                    quotes
+                </button>
+                <button class="trending-tag" data-tag="nature">
+                    <i class="fas fa-leaf"></i>
+                    nature
+                </button>
+                <button class="trending-tag" data-tag="food">
+                    <i class="fas fa-utensils"></i>
+                    food
+                </button>
+                <button class="trending-tag" data-tag="design">
+                    <i class="fas fa-palette"></i>
+                    design
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <div class="search-results">
+            <div class="results-header">
+                <h3 id="results-title">Popular Pins</h3>
+                <span id="results-count">Showing 42 results</span>
+            </div>
+            
+            <div class="masonry-container" id="search-results-container">
+                <!-- Search results will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Loading Skeleton -->
+        <div class="loading-skeleton" id="search-loading">
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+        </div>
+    </main>
+
+    <!-- Top Creators Section -->
+    <section class="top-creators">
+        <div class="creators-container">
+            <h2>Top Creators</h2>
+            <div class="creators-grid">
+                <div class="creator-card">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iNDAiIGN5PSIzMiIgcj0iMTIiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTIwIDYwYzAtMTEuMDQ2IDguOTU0LTIwIDIwLTIwczIwIDguOTU0IDIwIDIwdjRIMjB6IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="Emma Wilson" class="creator-avatar">
+                    <div class="creator-info">
+                        <h4>Emma Wilson</h4>
+                        <p>2.3K followers</p>
+                        <span class="creator-category">Interior Design</span>
+                    </div>
+                    <button class="btn btn-follow">Follow</button>
+                </div>
+                
+                <div class="creator-card">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNGRkM0QzQiLz4KPGNpcmNsZSBjeD0iNDAiIGN5PSIzMiIgcj0iMTIiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTIwIDYwYzAtMTEuMDQ2IDguOTU0LTIwIDIwLTIwczIwIDguOTU0IDIwIDIwdjRIMjB6IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="Sofia Chen" class="creator-avatar">
+                    <div class="creator-info">
+                        <h4>Sofia Chen</h4>
+                        <p>1.8K followers</p>
+                        <span class="creator-category">Fashion</span>
+                    </div>
+                    <button class="btn btn-follow">Follow</button>
+                </div>
+                
+                <div class="creator-card">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNDNEY0REQiLz4KPGNpcmNsZSBjeD0iNDAiIGN5PSIzMiIgcj0iMTIiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTIwIDYwYzAtMTEuMDQ2IDguOTU0LTIwIDIwLTIwczIwIDguOTU0IDIwIDIwdjRIMjB6IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="Alex Rivera" class="creator-avatar">
+                    <div class="creator-info">
+                        <h4>Alex Rivera</h4>
+                        <p>3.1K followers</p>
+                        <span class="creator-category">Travel</span>
+                    </div>
+                    <button class="btn btn-follow">Follow</button>
+                </div>
+                
+                <div class="creator-card">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNFNkU2RkEiLz4KPGNpcmNsZSBjeD0iNDAiIGN5PSIzMiIgcj0iMTIiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTIwIDYwYzAtMTEuMDQ2IDguOTU0LTIwIDIwLTIwczIwIDguOTU0IDIwIDIwdjRIMjB6IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="Maya Johnson" class="creator-avatar">
+                    <div class="creator-info">
+                        <h4>Maya Johnson</h4>
+                        <p>1.2K followers</p>
+                        <span class="creator-category">Quotes</span>
+                    </div>
+                    <button class="btn btn-follow">Follow</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Suggestions -->
+    <div class="search-suggestions" id="search-suggestions">
+        <div class="suggestions-header">
+            <h4>Popular searches</h4>
+        </div>
+        <div class="suggestions-list">
+            <div class="suggestion-item">
+                <i class="fas fa-search"></i>
+                <span>minimalist bedroom ideas</span>
+            </div>
+            <div class="suggestion-item">
+                <i class="fas fa-search"></i>
+                <span>aesthetic wallpapers</span>
+            </div>
+            <div class="suggestion-item">
+                <i class="fas fa-search"></i>
+                <span>travel photography</span>
+            </div>
+            <div class="suggestion-item">
+                <i class="fas fa-search"></i>
+                <span>boho fashion style</span>
+            </div>
+            <div class="suggestion-item">
+                <i class="fas fa-search"></i>
+                <span>self care quotes</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Search page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSearchPage();
+        });
+
+        function initializeSearchPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('q');
+            
+            if (searchQuery) {
+                document.getElementById('main-search').value = searchQuery;
+                performSearch(searchQuery);
+            } else {
+                loadPopularPins();
+            }
+            
+            // Initialize event listeners
+            initializeSearchListeners();
+        }
+
+        function initializeSearchListeners() {
+            // Search input
+            document.getElementById('main-search').addEventListener('input', function() {
+                const query = this.value.trim();
+                if (query) {
+                    debounceSearch(query);
+                } else {
+                    loadPopularPins();
+                }
+            });
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    applyFilter(filter);
+                });
+            });
+
+            // Sort select
+            document.querySelector('.sort-select').addEventListener('change', function() {
+                const sortBy = this.value;
+                applySorting(sortBy);
+            });
+
+            // Trending tags
+            document.querySelectorAll('.trending-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const tagName = this.dataset.tag;
+                    document.getElementById('main-search').value = tagName;
+                    performSearch(tagName);
+                });
+            });
+
+            // Search suggestions
+            document.querySelectorAll('.suggestion-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const suggestion = this.querySelector('span').textContent;
+                    document.getElementById('main-search').value = suggestion;
+                    performSearch(suggestion);
+                });
+            });
+        }
+
+        const debounceSearch = debounce(performSearch, 500);
+
+        function performSearch(query) {
+            showSearchLoading();
+            
+            // Update URL
+            const newUrl = `${window.location.pathname}?q=${encodeURIComponent(query)}`;
+            window.history.pushState({ query }, '', newUrl);
+            
+            // Update results header
+            document.getElementById('results-title').textContent = `Results for "${query}"`;
+            
+            // Simulate search
+            setTimeout(() => {
+                const results = searchPins(query);
+                displaySearchResults(results);
+                hideSearchLoading();
+            }, 500);
+        }
+
+        function loadPopularPins() {
+            document.getElementById('results-title').textContent = 'Popular Pins';
+            document.getElementById('results-count').textContent = 'Showing trending content';
+            
+            // Load sample pins
+            const popularPins = window.AestheticApp ? window.AestheticApp.pins() : [];
+            displaySearchResults(popularPins);
+        }
+
+        function searchPins(query) {
+            // This would normally make an API call
+            const allPins = window.AestheticApp ? window.AestheticApp.pins() : [];
+            return allPins.filter(pin => {
+                const searchText = `${pin.title} ${pin.description} ${pin.tags.join(' ')}`.toLowerCase();
+                return searchText.includes(query.toLowerCase());
+            });
+        }
+
+        function displaySearchResults(results) {
+            const container = document.getElementById('search-results-container');
+            container.innerHTML = '';
+            
+            if (results.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No results found</h3>
+                        <p>Try different keywords or explore trending content</p>
+                    </div>
+                `;
+                return;
+            }
+
+            document.getElementById('results-count').textContent = `Showing ${results.length} results`;
+            
+            results.forEach(pin => {
+                const pinElement = createPinElement(pin);
+                container.appendChild(pinElement);
+            });
+        }
+
+        function applyFilter(filter) {
+            // Implementation for filtering results
+            const currentQuery = document.getElementById('main-search').value;
+            if (currentQuery) {
+                performSearch(currentQuery);
+            } else {
+                loadPopularPins();
+            }
+        }
+
+        function applySorting(sortBy) {
+            // Implementation for sorting results
+            const currentQuery = document.getElementById('main-search').value;
+            if (currentQuery) {
+                performSearch(currentQuery);
+            } else {
+                loadPopularPins();
+            }
+        }
+
+        function showSearchLoading() {
+            document.getElementById('search-loading').style.display = 'grid';
+        }
+
+        function hideSearchLoading() {
+            document.getElementById('search-loading').style.display = 'none';
+        }
+
+        // Create pin element function (reused from main script)
+        function createPinElement(pin) {
+            const pinCard = document.createElement('div');
+            pinCard.className = 'pin-card fade-in';
+            pinCard.setAttribute('data-pin-id', pin.id);
+            pinCard.setAttribute('data-category', pin.category);
+            
+            const savedPins = JSON.parse(localStorage.getItem('savedPins')) || [];
+            const isSaved = savedPins.includes(pin.id);
+            const saveButtonClass = isSaved ? 'saved' : '';
+            
+            pinCard.innerHTML = `
+                <div class="pin-image-container">
+                    <img src="${pin.image}" alt="${pin.title}" class="pin-image">
+                    <div class="pin-overlay">
+                        <div class="pin-actions">
+                            <button class="pin-action save-btn ${saveButtonClass}" onclick="toggleSavePin(${pin.id})">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                            <button class="pin-action" onclick="sharePin(${pin.id})">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pin-info">
+                    <h3 class="pin-title">${pin.title}</h3>
+                    <p class="pin-description">${pin.description}</p>
+                    <div class="pin-tags">
+                        ${pin.tags.map(tag => `<span class="pin-tag">${tag}</span>`).join('')}
+                    </div>
+                    <div class="pin-user">
+                        <img src="${pin.user.avatar}" alt="${pin.user.name}" class="pin-user-avatar">
+                        <div class="pin-user-info">
+                            <h4>${pin.user.name}</h4>
+                            <p>${pin.user.followers} followers</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return pinCard;
+        }
+    </script>
+
+    <style>
+        /* Search page specific styles */
+        .search-content {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+
+        .search-header {
+            background: linear-gradient(135deg, var(--primary-pink), var(--accent-rose));
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            color: white;
+            text-align: center;
+        }
+
+        .search-header-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .search-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .search-filters {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray);
+            padding: var(--spacing-lg);
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+
+        .filter-group, .sort-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .filter-group label, .sort-group label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .filter-btn {
+            background: none;
+            border: 2px solid var(--gray);
+            color: var(--text-secondary);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-pink);
+            border-color: var(--primary-pink);
+            color: white;
+        }
+
+        .sort-select {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid var(--gray);
+            border-radius: var(--radius-md);
+            background: var(--white);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .trending-section {
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            background: var(--light-gray);
+            text-align: center;
+        }
+
+        .trending-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xl);
+            color: var(--text-primary);
+        }
+
+        .trending-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .trending-tag {
+            background: var(--white);
+            border: none;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-2xl);
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .trending-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        .trending-tag i {
+            font-size: 0.9rem;
+        }
+
+        .search-results {
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .results-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        #results-count {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--primary-pink);
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        .top-creators {
+            background: var(--light-gray);
+            padding: var(--spacing-2xl) var(--spacing-lg);
+        }
+
+        .creators-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .top-creators h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .creators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .creator-card {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition-medium);
+        }
+
+        .creator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .creator-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .creator-info h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .creator-info p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .creator-category {
+            background: var(--primary-pink);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border: 1px solid var(--gray);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .suggestions-header {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .suggestions-header h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .suggestion-item {
+            padding: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .suggestion-item:hover {
+            background: var(--light-gray);
+        }
+
+        .suggestion-item i {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .suggestion-item span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .search-header h1 {
+                font-size: 2rem;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-buttons {
+                flex-wrap: wrap;
+            }
+
+            .trending-tags {
+                justify-content: flex-start;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+
+            .creators-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

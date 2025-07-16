@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Aesthetic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-heart"></i>
+                    <span>Aesthetic</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="search.html" class="nav-link">Explore</a>
+                    <a href="upload.html" class="nav-link">Create</a>
+                </div>
+            </div>
+            <div class="nav-center">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for inspiration..." class="search-input">
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">3</span>
+                </button>
+                <div class="profile-menu">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMTAgMzBjMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMHMxMCA0LjQ3NyAxMCAxMHYySDEweiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K" alt="Profile" class="profile-avatar">
+                    <div class="dropdown-menu">
+                        <a href="profile.html">Profile</a>
+                        <a href="settings.html">Settings</a>
+                        <a href="auth.html">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Settings Content -->
+    <main class="settings-content">
+        <div class="settings-container">
+            <div class="settings-header">
+                <h1>Settings</h1>
+                <p>Manage your account preferences and privacy settings</p>
+            </div>
+
+            <div class="settings-layout">
+                <!-- Settings Navigation -->
+                <div class="settings-nav">
+                    <div class="settings-nav-item active" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="account">
+                        <i class="fas fa-cog"></i>
+                        <span>Account</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="privacy">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Privacy</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="appearance">
+                        <i class="fas fa-palette"></i>
+                        <span>Appearance</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="blocked">
+                        <i class="fas fa-ban"></i>
+                        <span>Blocked Users</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="language">
+                        <i class="fas fa-globe"></i>
+                        <span>Language</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Danger Zone</span>
+                    </div>
+                </div>
+
+                <!-- Settings Content -->
+                <div class="settings-main">
+                    <!-- Profile Settings -->
+                    <div class="settings-section active" id="profile-section">
+                        <h2>Profile Settings</h2>
+                        <div class="settings-card">
+                            <div class="profile-picture-section">
+                                <div class="current-avatar">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iNDAiIGN5PSIzMiIgcj0iMTIiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTIwIDYwYzAtMTEuMDQ2IDguOTU0LTIwIDIwLTIwczIwIDguOTU0IDIwIDIwdjRIMjB6IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="Profile Picture">
+                                </div>
+                                <div class="avatar-controls">
+                                    <button class="btn btn-primary" onclick="changeAvatar()">
+                                        <i class="fas fa-camera"></i> Change Picture
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="removeAvatar()">
+                                        <i class="fas fa-trash"></i> Remove
+                                    </button>
+                                </div>
+                            </div>
+                            <form id="profile-form">
+                                <div class="form-group">
+                                    <label for="display-name">Display Name</label>
+                                    <input type="text" id="display-name" name="displayName" class="form-input" value="Your Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio">Bio</label>
+                                    <textarea id="bio" name="bio" class="form-textarea" rows="3" placeholder="Tell us about yourself...">Creative soul sharing beautiful moments and inspiration ✨</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Website</label>
+                                    <input type="url" id="website" name="website" class="form-input" placeholder="https://yourwebsite.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input type="text" id="location" name="location" class="form-input" placeholder="Your location">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Account Settings -->
+                    <div class="settings-section" id="account-section">
+                        <h2>Account Settings</h2>
+                        <div class="settings-card">
+                            <form id="account-form">
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" class="form-input" value="user@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" name="username" class="form-input" value="yourname" required>
+                                    <small class="form-help">Your username will be used in your profile URL</small>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Update Account</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h3>Change Password</h3>
+                            <form id="password-form">
+                                <div class="form-group">
+                                    <label for="current-password">Current Password</label>
+                                    <input type="password" id="current-password" name="currentPassword" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-password">New Password</label>
+                                    <input type="password" id="new-password" name="newPassword" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm-password">Confirm New Password</label>
+                                    <input type="password" id="confirm-password" name="confirmPassword" class="form-input" required>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Settings -->
+                    <div class="settings-section" id="privacy-section">
+                        <h2>Privacy Settings</h2>
+                        <div class="settings-card">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Private Account</h4>
+                                    <p>Only people you approve can see your pins and collections</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="private-account">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Hide from Search Engines</h4>
+                                    <p>Prevent search engines from indexing your profile</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="hide-search">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Data Download</h4>
+                                    <p>Download a copy of your data</p>
+                                </div>
+                                <div class="setting-control">
+                                    <button class="btn btn-secondary" onclick="downloadData()">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Settings -->
+                    <div class="settings-section" id="notifications-section">
+                        <h2>Notification Settings</h2>
+                        <div class="settings-card">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive email updates about your account activity</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="email-notifications" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Like Notifications</h4>
+                                    <p>Get notified when someone likes your pins</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="like-notifications" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Follow Notifications</h4>
+                                    <p>Get notified when someone follows you</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="follow-notifications" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Newsletter</h4>
+                                    <p>Receive our weekly newsletter with trending content</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="newsletter">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance Settings -->
+                    <div class="settings-section" id="appearance-section">
+                        <h2>Appearance Settings</h2>
+                        <div class="settings-card">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Theme</h4>
+                                    <p>Choose your preferred color scheme</p>
+                                </div>
+                                <div class="setting-control">
+                                    <select id="theme-select" class="form-select">
+                                        <option value="light">Light</option>
+                                        <option value="dark">Dark</option>
+                                        <option value="auto">Auto (System)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Compact View</h4>
+                                    <p>Show more pins in a smaller grid layout</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="compact-view">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Auto-play Videos</h4>
+                                    <p>Automatically play videos in your feed</p>
+                                </div>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="autoplay-videos" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blocked Users -->
+                    <div class="settings-section" id="blocked-section">
+                        <h2>Blocked Users</h2>
+                        <div class="settings-card">
+                            <div class="blocked-users-list" id="blocked-users-list">
+                                <div class="empty-state">
+                                    <i class="fas fa-ban"></i>
+                                    <h3>No blocked users</h3>
+                                    <p>Users you block will appear here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Language Settings -->
+                    <div class="settings-section" id="language-section">
+                        <h2>Language Settings</h2>
+                        <div class="settings-card">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Display Language</h4>
+                                    <p>Choose your preferred language for the interface</p>
+                                </div>
+                                <div class="setting-control">
+                                    <select id="language-select" class="form-select">
+                                        <option value="en">English</option>
+                                        <option value="es">Español</option>
+                                        <option value="fr">Français</option>
+                                        <option value="de">Deutsch</option>
+                                        <option value="it">Italiano</option>
+                                        <option value="pt">Português</option>
+                                        <option value="ja">日本語</option>
+                                        <option value="ko">한국어</option>
+                                        <option value="zh">中文</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="settings-section" id="danger-section">
+                        <h2>Danger Zone</h2>
+                        <div class="settings-card danger-card">
+                            <div class="danger-item">
+                                <div class="danger-info">
+                                    <h4>Deactivate Account</h4>
+                                    <p>Temporarily disable your account. You can reactivate it anytime.</p>
+                                </div>
+                                <div class="danger-control">
+                                    <button class="btn btn-warning" onclick="deactivateAccount()">
+                                        <i class="fas fa-pause"></i> Deactivate
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="danger-item">
+                                <div class="danger-info">
+                                    <h4>Delete Account</h4>
+                                    <p>Permanently delete your account and all your data. This cannot be undone.</p>
+                                </div>
+                                <div class="danger-control">
+                                    <button class="btn btn-danger" onclick="deleteAccount()">
+                                        <i class="fas fa-trash"></i> Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Settings page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSettingsPage();
+        });
+
+        function initializeSettingsPage() {
+            // Initialize event listeners
+            initializeSettingsListeners();
+            
+            // Load saved settings
+            loadSettings();
+            
+            // Set initial theme
+            updateThemeSelect();
+        }
+
+        function initializeSettingsListeners() {
+            // Settings navigation
+            document.querySelectorAll('.settings-nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.dataset.section;
+                    switchSettingsSection(section);
+                });
+            });
+
+            // Form submissions
+            document.getElementById('profile-form').addEventListener('submit', handleProfileSubmit);
+            document.getElementById('account-form').addEventListener('submit', handleAccountSubmit);
+            document.getElementById('password-form').addEventListener('submit', handlePasswordSubmit);
+
+            // Theme selection
+            document.getElementById('theme-select').addEventListener('change', handleThemeChange);
+
+            // Language selection
+            document.getElementById('language-select').addEventListener('change', handleLanguageChange);
+
+            // Toggle switches
+            document.querySelectorAll('.switch input').forEach(input => {
+                input.addEventListener('change', handleToggleChange);
+            });
+        }
+
+        function switchSettingsSection(section) {
+            // Update navigation
+            document.querySelectorAll('.settings-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+
+            // Update content
+            document.querySelectorAll('.settings-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(`${section}-section`).classList.add('active');
+        }
+
+        function handleProfileSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const profileData = {
+                displayName: formData.get('displayName'),
+                bio: formData.get('bio'),
+                website: formData.get('website'),
+                location: formData.get('location')
+            };
+            
+            // Save to localStorage
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            Object.assign(userData, profileData);
+            localStorage.setItem('userData', JSON.stringify(userData));
+            
+            showNotification('Profile updated successfully!', 'success');
+        }
+
+        function handleAccountSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const accountData = {
+                email: formData.get('email'),
+                username: formData.get('username')
+            };
+            
+            // Save to localStorage
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            Object.assign(userData, accountData);
+            localStorage.setItem('userData', JSON.stringify(userData));
+            
+            showNotification('Account updated successfully!', 'success');
+        }
+
+        function handlePasswordSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const currentPassword = formData.get('currentPassword');
+            const newPassword = formData.get('newPassword');
+            const confirmPassword = formData.get('confirmPassword');
+            
+            if (newPassword !== confirmPassword) {
+                showNotification('Passwords do not match!', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 8) {
+                showNotification('Password must be at least 8 characters long!', 'error');
+                return;
+            }
+            
+            // Simulate password change
+            showNotification('Password changed successfully!', 'success');
+            event.target.reset();
+        }
+
+        function handleThemeChange(event) {
+            const theme = event.target.value;
+            
+            if (theme === 'auto') {
+                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', systemTheme);
+            } else {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+            
+            localStorage.setItem('theme', theme);
+            showNotification('Theme updated successfully!', 'success');
+        }
+
+        function handleLanguageChange(event) {
+            const language = event.target.value;
+            localStorage.setItem('language', language);
+            showNotification('Language updated successfully!', 'success');
+        }
+
+        function handleToggleChange(event) {
+            const setting = event.target.id;
+            const value = event.target.checked;
+            
+            // Save setting to localStorage
+            const settings = JSON.parse(localStorage.getItem('settings')) || {};
+            settings[setting] = value;
+            localStorage.setItem('settings', JSON.stringify(settings));
+            
+            showNotification('Setting updated successfully!', 'success');
+        }
+
+        function loadSettings() {
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            const settings = JSON.parse(localStorage.getItem('settings')) || {};
+            
+            // Load profile data
+            if (userData.displayName) document.getElementById('display-name').value = userData.displayName;
+            if (userData.bio) document.getElementById('bio').value = userData.bio;
+            if (userData.website) document.getElementById('website').value = userData.website;
+            if (userData.location) document.getElementById('location').value = userData.location;
+            if (userData.email) document.getElementById('email').value = userData.email;
+            if (userData.username) document.getElementById('username').value = userData.username;
+            
+            // Load toggle settings
+            Object.keys(settings).forEach(key => {
+                const element = document.getElementById(key);
+                if (element && element.type === 'checkbox') {
+                    element.checked = settings[key];
+                }
+            });
+            
+            // Load language
+            const language = localStorage.getItem('language') || 'en';
+            document.getElementById('language-select').value = language;
+        }
+
+        function updateThemeSelect() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.getElementById('theme-select').value = theme;
+        }
+
+        function changeAvatar() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const avatar = document.querySelector('.current-avatar img');
+                        avatar.src = e.target.result;
+                        showNotification('Avatar updated successfully!', 'success');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        }
+
+        function removeAvatar() {
+            if (confirm('Are you sure you want to remove your profile picture?')) {
+                const avatar = document.querySelector('.current-avatar img');
+                avatar.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iNDAiIGN5PSIzMiIgcj0iMTIiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTIwIDYwYzAtMTEuMDQ2IDguOTU0LTIwIDIwLTIwczIwIDguOTU0IDIwIDIwdjRIMjB6IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=';
+                showNotification('Profile picture removed', 'success');
+            }
+        }
+
+        function downloadData() {
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            const pins = JSON.parse(localStorage.getItem('userPins')) || [];
+            const collections = JSON.parse(localStorage.getItem('userCollections')) || [];
+            
+            const data = {
+                userData,
+                pins,
+                collections,
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'aesthetic-data-export.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showNotification('Data export downloaded!', 'success');
+        }
+
+        function deactivateAccount() {
+            if (confirm('Are you sure you want to deactivate your account? You can reactivate it anytime by logging in.')) {
+                showNotification('Account deactivated successfully', 'success');
+                setTimeout(() => {
+                    window.location.href = 'auth.html';
+                }, 2000);
+            }
+        }
+
+        function deleteAccount() {
+            const confirmed = confirm('Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.');
+            if (confirmed) {
+                const doubleConfirmed = confirm('This is permanent and cannot be undone. Are you absolutely sure?');
+                if (doubleConfirmed) {
+                    // Clear all user data
+                    localStorage.clear();
+                    showNotification('Account deleted successfully', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'auth.html';
+                    }, 2000);
+                }
+            }
+        }
+
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            if (window.AestheticApp && window.AestheticApp.showNotification) {
+                window.AestheticApp.showNotification(message, type);
+            } else {
+                alert(message);
+            }
+        }
+    </script>
+
+    <style>
+        /* Settings page specific styles */
+        .settings-content {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            background: var(--light-gray);
+        }
+
+        .settings-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-lg);
+        }
+
+        .settings-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .settings-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .settings-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: var(--spacing-2xl);
+        }
+
+        .settings-nav {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .settings-nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .settings-nav-item:hover,
+        .settings-nav-item.active {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        .settings-nav-item i {
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .settings-nav-item span {
+            font-weight: 500;
+        }
+
+        .settings-main {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-2xl);
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .settings-card {
+            background: var(--light-gray);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .settings-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .profile-picture-section {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .current-avatar img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .avatar-controls {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg) 0;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .setting-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .setting-control {
+            flex-shrink: 0;
+        }
+
+        /* Switch Toggle Styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gray);
+            transition: var(--transition-fast);
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: var(--transition-fast);
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-pink);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .danger-card {
+            background: #ffeaea;
+            border: 1px solid #ffcdd2;
+        }
+
+        .danger-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg) 0;
+            border-bottom: 1px solid #ffcdd2;
+        }
+
+        .danger-item:last-child {
+            border-bottom: none;
+        }
+
+        .danger-info h4 {
+            color: #d32f2f;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .danger-info p {
+            color: #d32f2f;
+            font-size: 0.9rem;
+        }
+
+        .btn-warning {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+        }
+
+        .btn-warning:hover {
+            background-color: #f57c00;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .blocked-users-list {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--primary-pink);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .settings-nav {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: var(--spacing-sm);
+            }
+
+            .settings-nav-item {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--spacing-sm);
+                margin-bottom: 0;
+            }
+
+            .settings-nav-item span {
+                font-size: 0.9rem;
+            }
+
+            .profile-picture-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .avatar-controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-md);
+            }
+
+            .setting-control {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</body>
+</html>

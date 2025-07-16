@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Pin - Aesthetic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-heart"></i>
+                    <span>Aesthetic</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="search.html" class="nav-link">Explore</a>
+                    <a href="upload.html" class="nav-link active">Create</a>
+                </div>
+            </div>
+            <div class="nav-center">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for inspiration..." class="search-input">
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">3</span>
+                </button>
+                <div class="profile-menu">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMTAgMzBjMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMHMxMCA0LjQ3NyAxMCAxMHYySDEweiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K" alt="Profile" class="profile-avatar">
+                    <div class="dropdown-menu">
+                        <a href="profile.html">Profile</a>
+                        <a href="settings.html">Settings</a>
+                        <a href="auth.html">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Upload Content -->
+    <main class="upload-content">
+        <div class="upload-container">
+            <div class="upload-header">
+                <h1>Create a Pin</h1>
+                <p>Share your inspiration with the world</p>
+            </div>
+
+            <div class="upload-form-container">
+                <form id="upload-form" class="upload-form">
+                    <div class="form-row">
+                        <!-- Image Upload Section -->
+                        <div class="upload-section">
+                            <div class="image-upload-area" id="image-upload-area">
+                                <div class="upload-placeholder" id="upload-placeholder">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h3>Choose a file or drag and drop it here</h3>
+                                    <p>We recommend using high-quality .jpg files less than 20MB</p>
+                                    <button type="button" class="btn btn-primary" onclick="triggerFileInput()">
+                                        Choose file
+                                    </button>
+                                </div>
+                                <div class="image-preview" id="image-preview" style="display: none;">
+                                    <img id="preview-image" src="" alt="Preview">
+                                    <div class="image-overlay">
+                                        <button type="button" class="btn btn-secondary" onclick="changeImage()">
+                                            <i class="fas fa-edit"></i> Change
+                                        </button>
+                                        <button type="button" class="btn btn-danger" onclick="removeImage()">
+                                            <i class="fas fa-trash"></i> Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="file" id="file-input" accept="image/*" style="display: none;">
+                        </div>
+
+                        <!-- Pin Details Section -->
+                        <div class="details-section">
+                            <div class="form-group">
+                                <label for="pin-title">Title</label>
+                                <input type="text" id="pin-title" name="title" class="form-input" placeholder="Add a title" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pin-description">Description</label>
+                                <textarea id="pin-description" name="description" class="form-textarea" rows="4" placeholder="Tell everyone what your pin is about"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pin-tags">Tags</label>
+                                <div class="tags-input-container">
+                                    <input type="text" id="pin-tags" class="form-input" placeholder="Add tags separated by commas">
+                                    <div class="tags-preview" id="tags-preview"></div>
+                                </div>
+                                <small class="form-help">Add up to 10 tags to help people find your pin</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pin-category">Category</label>
+                                <select id="pin-category" name="category" class="form-select">
+                                    <option value="">Select a category</option>
+                                    <option value="aesthetic">Aesthetic</option>
+                                    <option value="fashion">Fashion</option>
+                                    <option value="travel">Travel</option>
+                                    <option value="quotes">Quotes</option>
+                                    <option value="design">Design</option>
+                                    <option value="nature">Nature</option>
+                                    <option value="food">Food</option>
+                                    <option value="art">Art</option>
+                                    <option value="photography">Photography</option>
+                                    <option value="lifestyle">Lifestyle</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pin-collection">Save to Collection</label>
+                                <select id="pin-collection" name="collection" class="form-select">
+                                    <option value="">Choose a collection</option>
+                                    <option value="1">Dream Home</option>
+                                    <option value="2">Fashion Inspo</option>
+                                    <option value="3">Travel Bucket List</option>
+                                </select>
+                                <button type="button" class="btn btn-link" onclick="openCreateCollectionModal()">
+                                    <i class="fas fa-plus"></i> Create new collection
+                                </button>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pin-source">Source URL (optional)</label>
+                                <input type="url" id="pin-source" name="source" class="form-input" placeholder="https://example.com">
+                                <small class="form-help">Add a link to give credit to the original source</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="pin-private" name="private">
+                                    <span class="checkmark"></span>
+                                    Keep this pin private
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="saveDraft()">
+                                    <i class="fas fa-save"></i> Save as Draft
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-share"></i> Publish Pin
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Recent Uploads -->
+        <div class="recent-uploads">
+            <div class="uploads-container">
+                <h2>Your Recent Uploads</h2>
+                <div class="uploads-grid" id="recent-uploads-grid">
+                    <!-- Recent uploads will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Collection Modal -->
+    <div class="modal" id="create-collection-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCreateCollectionModal()">&times;</span>
+            <div class="modal-header">
+                <h3>Create New Collection</h3>
+            </div>
+            <div class="modal-body">
+                <form id="create-collection-form">
+                    <div class="form-group">
+                        <label for="collection-name">Collection Name</label>
+                        <input type="text" id="collection-name" name="name" class="form-input" placeholder="Enter collection name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="collection-description">Description</label>
+                        <textarea id="collection-description" name="description" class="form-textarea" rows="3" placeholder="Describe your collection..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="collection-private" name="private">
+                            <span class="checkmark"></span>
+                            Keep this collection private
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreateCollectionModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Collection</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Upload page specific JavaScript
+        let selectedFile = null;
+        let currentTags = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeUploadPage();
+        });
+
+        function initializeUploadPage() {
+            // Initialize event listeners
+            initializeUploadListeners();
+            
+            // Load recent uploads
+            loadRecentUploads();
+            
+            // Initialize drag and drop
+            initializeDragAndDrop();
+        }
+
+        function initializeUploadListeners() {
+            // File input change
+            document.getElementById('file-input').addEventListener('change', handleFileSelect);
+            
+            // Tags input
+            document.getElementById('pin-tags').addEventListener('input', handleTagsInput);
+            document.getElementById('pin-tags').addEventListener('keydown', handleTagsKeydown);
+            
+            // Form submission
+            document.getElementById('upload-form').addEventListener('submit', handleFormSubmit);
+            
+            // Collection form
+            document.getElementById('create-collection-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createNewCollection();
+            });
+        }
+
+        function initializeDragAndDrop() {
+            const uploadArea = document.getElementById('image-upload-area');
+            
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+            });
+            
+            uploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFile(files[0]);
+                }
+            });
+        }
+
+        function triggerFileInput() {
+            document.getElementById('file-input').click();
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
+
+        function handleFile(file) {
+            // Validate file
+            if (!file.type.startsWith('image/')) {
+                showNotification('Please select a valid image file', 'error');
+                return;
+            }
+            
+            if (file.size > 20 * 1024 * 1024) { // 20MB limit
+                showNotification('File size must be less than 20MB', 'error');
+                return;
+            }
+            
+            selectedFile = file;
+            
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview-image').src = e.target.result;
+                document.getElementById('upload-placeholder').style.display = 'none';
+                document.getElementById('image-preview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function changeImage() {
+            document.getElementById('file-input').click();
+        }
+
+        function removeImage() {
+            selectedFile = null;
+            document.getElementById('upload-placeholder').style.display = 'block';
+            document.getElementById('image-preview').style.display = 'none';
+            document.getElementById('file-input').value = '';
+        }
+
+        function handleTagsInput(event) {
+            const input = event.target;
+            const value = input.value;
+            
+            if (value.endsWith(',') || value.endsWith(' ')) {
+                const tag = value.slice(0, -1).trim();
+                if (tag && !currentTags.includes(tag) && currentTags.length < 10) {
+                    currentTags.push(tag);
+                    updateTagsDisplay();
+                    input.value = '';
+                }
+            }
+        }
+
+        function handleTagsKeydown(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const tag = event.target.value.trim();
+                if (tag && !currentTags.includes(tag) && currentTags.length < 10) {
+                    currentTags.push(tag);
+                    updateTagsDisplay();
+                    event.target.value = '';
+                }
+            } else if (event.key === 'Backspace' && event.target.value === '' && currentTags.length > 0) {
+                currentTags.pop();
+                updateTagsDisplay();
+            }
+        }
+
+        function updateTagsDisplay() {
+            const container = document.getElementById('tags-preview');
+            container.innerHTML = '';
+            
+            currentTags.forEach((tag, index) => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'tag-item';
+                tagElement.innerHTML = `
+                    ${tag}
+                    <button type="button" onclick="removeTag(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                container.appendChild(tagElement);
+            });
+        }
+
+        function removeTag(index) {
+            currentTags.splice(index, 1);
+            updateTagsDisplay();
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            if (!selectedFile) {
+                showNotification('Please select an image', 'error');
+                return;
+            }
+            
+            const formData = new FormData(event.target);
+            const pinData = {
+                id: Date.now(),
+                title: formData.get('title'),
+                description: formData.get('description'),
+                tags: currentTags,
+                category: formData.get('category'),
+                collection: formData.get('collection'),
+                source: formData.get('source'),
+                private: formData.get('private') === 'on',
+                image: URL.createObjectURL(selectedFile),
+                user: {
+                    id: 'user123',
+                    name: 'You',
+                    avatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMTAgMzBjMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMHMxMCA0LjQ3NyAxMCAxMHYySDEweiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K',
+                    followers: 1243
+                },
+                likes: 0,
+                saves: 0,
+                createdAt: new Date().toISOString()
+            };
+            
+            // Save pin (simulate API call)
+            const userPins = JSON.parse(localStorage.getItem('userPins')) || [];
+            userPins.unshift(pinData);
+            localStorage.setItem('userPins', JSON.stringify(userPins));
+            
+            showNotification('Pin published successfully!', 'success');
+            
+            // Reset form
+            resetForm();
+            
+            // Redirect to profile after delay
+            setTimeout(() => {
+                window.location.href = 'profile.html';
+            }, 1500);
+        }
+
+        function saveDraft() {
+            if (!selectedFile) {
+                showNotification('Please select an image first', 'error');
+                return;
+            }
+            
+            const formData = new FormData(document.getElementById('upload-form'));
+            const draftData = {
+                id: Date.now(),
+                title: formData.get('title'),
+                description: formData.get('description'),
+                tags: currentTags,
+                category: formData.get('category'),
+                collection: formData.get('collection'),
+                source: formData.get('source'),
+                private: formData.get('private') === 'on',
+                image: URL.createObjectURL(selectedFile),
+                isDraft: true,
+                createdAt: new Date().toISOString()
+            };
+            
+            // Save draft
+            const drafts = JSON.parse(localStorage.getItem('drafts')) || [];
+            drafts.unshift(draftData);
+            localStorage.setItem('drafts', JSON.stringify(drafts));
+            
+            showNotification('Draft saved successfully!', 'success');
+        }
+
+        function resetForm() {
+            document.getElementById('upload-form').reset();
+            currentTags = [];
+            selectedFile = null;
+            removeImage();
+            updateTagsDisplay();
+        }
+
+        function loadRecentUploads() {
+            const container = document.getElementById('recent-uploads-grid');
+            const userPins = JSON.parse(localStorage.getItem('userPins')) || [];
+            
+            if (userPins.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-image"></i>
+                        <h3>No uploads yet</h3>
+                        <p>Your uploaded pins will appear here</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = '';
+            userPins.slice(0, 6).forEach(pin => {
+                const pinElement = createUploadPreview(pin);
+                container.appendChild(pinElement);
+            });
+        }
+
+        function createUploadPreview(pin) {
+            const pinCard = document.createElement('div');
+            pinCard.className = 'upload-preview';
+            
+            pinCard.innerHTML = `
+                <div class="preview-image">
+                    <img src="${pin.image}" alt="${pin.title}">
+                </div>
+                <div class="preview-info">
+                    <h4>${pin.title}</h4>
+                    <p>${pin.description || 'No description'}</p>
+                    <div class="preview-stats">
+                        <span><i class="fas fa-heart"></i> ${pin.likes}</span>
+                        <span><i class="fas fa-bookmark"></i> ${pin.saves}</span>
+                    </div>
+                </div>
+            `;
+            
+            return pinCard;
+        }
+
+        // Modal functions
+        function openCreateCollectionModal() {
+            document.getElementById('create-collection-modal').style.display = 'block';
+        }
+
+        function closeCreateCollectionModal() {
+            document.getElementById('create-collection-modal').style.display = 'none';
+        }
+
+        function createNewCollection() {
+            const formData = new FormData(document.getElementById('create-collection-form'));
+            const collectionData = {
+                id: Date.now(),
+                name: formData.get('name'),
+                description: formData.get('description'),
+                isPrivate: formData.get('private') === 'on',
+                pinCount: 0,
+                coverImage: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRkZGNUU2Ii8+CjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI0Y1RTZEMyIvPgo8cmVjdCB4PSI1MCIgeT0iMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjRTZFNkZBIi8+Cjwvc3ZnPgo=",
+                createdAt: new Date().toISOString()
+            };
+
+            // Save collection
+            const collections = JSON.parse(localStorage.getItem('userCollections')) || [];
+            collections.push(collectionData);
+            localStorage.setItem('userCollections', JSON.stringify(collections));
+            
+            // Add to dropdown
+            const select = document.getElementById('pin-collection');
+            const option = document.createElement('option');
+            option.value = collectionData.id;
+            option.textContent = collectionData.name;
+            select.appendChild(option);
+            select.value = collectionData.id;
+            
+            closeCreateCollectionModal();
+            showNotification('Collection created successfully!', 'success');
+        }
+
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            if (window.AestheticApp && window.AestheticApp.showNotification) {
+                window.AestheticApp.showNotification(message, type);
+            } else {
+                alert(message);
+            }
+        }
+    </script>
+
+    <style>
+        /* Upload page specific styles */
+        .upload-content {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            background: var(--light-gray);
+        }
+
+        .upload-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-lg);
+        }
+
+        .upload-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .upload-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .upload-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .upload-form-container {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            padding: var(--spacing-2xl);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+        }
+
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-upload-area {
+            border: 2px dashed var(--gray);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            text-align: center;
+            transition: var(--transition-fast);
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-upload-area.drag-over {
+            border-color: var(--primary-pink);
+            background-color: rgba(255, 183, 197, 0.1);
+        }
+
+        .upload-placeholder i {
+            font-size: 3rem;
+            color: var(--primary-pink);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .upload-placeholder h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .upload-placeholder p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .image-preview {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+            opacity: 0;
+            transition: var(--transition-fast);
+            border-radius: var(--radius-lg);
+        }
+
+        .image-preview:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-input, .form-textarea, .form-select {
+            padding: var(--spacing-md);
+            border: 2px solid var(--gray);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 3px rgba(255, 183, 197, 0.1);
+        }
+
+        .tags-input-container {
+            position: relative;
+        }
+
+        .tags-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .tag-item {
+            background: var(--primary-pink);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .tag-item button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0;
+            font-size: 0.8rem;
+        }
+
+        .form-help {
+            margin-top: var(--spacing-sm);
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .btn-link {
+            background: none;
+            border: none;
+            color: var(--primary-pink);
+            text-decoration: none;
+            cursor: pointer;
+            padding: var(--spacing-sm) 0;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            cursor: pointer;
+            margin-top: var(--spacing-sm);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: flex-end;
+            margin-top: var(--spacing-xl);
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .recent-uploads {
+            background: var(--white);
+            padding: var(--spacing-2xl) var(--spacing-lg);
+        }
+
+        .uploads-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .recent-uploads h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .uploads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .upload-preview {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .upload-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .preview-image {
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-info {
+            padding: var(--spacing-md);
+        }
+
+        .preview-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .preview-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .preview-stats {
+            display: flex;
+            gap: var(--spacing-md);
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .preview-stats i {
+            margin-right: var(--spacing-xs);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--primary-pink);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .upload-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .uploads-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</body>
+</html>

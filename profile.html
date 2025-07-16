@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Aesthetic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-heart"></i>
+                    <span>Aesthetic</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="search.html" class="nav-link">Explore</a>
+                    <a href="upload.html" class="nav-link">Create</a>
+                </div>
+            </div>
+            <div class="nav-center">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for inspiration..." class="search-input">
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">3</span>
+                </button>
+                <div class="profile-menu">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMTAgMzBjMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMHMxMCA0LjQ3NyAxMCAxMHYySDEweiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K" alt="Profile" class="profile-avatar">
+                    <div class="dropdown-menu">
+                        <a href="profile.html">Profile</a>
+                        <a href="settings.html">Settings</a>
+                        <a href="auth.html">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <main class="profile-content">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-header-container">
+                <div class="profile-avatar-large">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjYwIiBmaWxsPSIjRkZCN0M1Ii8+CjxjaXJjbGUgY3g9IjYwIiBjeT0iNDgiIHI9IjE4IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMCA5MGMwLTE2LjU2OSAxMy40MzEtMzAgMzAtMzBzMzAgMTMuNDMxIDMwIDMwdjZIMzB6IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="Profile Avatar" id="profile-avatar">
+                    <button class="edit-avatar-btn">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                
+                <div class="profile-info">
+                    <h1 id="profile-name">Your Name</h1>
+                    <p id="profile-bio">Creative soul sharing beautiful moments and inspiration ✨</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="pins-count">42</span>
+                            <span class="stat-label">Pins</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="followers-count">1,243</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="following-count">567</span>
+                            <span class="stat-label">Following</span>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" onclick="openEditProfileModal()">
+                            <i class="fas fa-edit"></i>
+                            Edit Profile
+                        </button>
+                        <button class="btn btn-secondary" onclick="shareProfile()">
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Navigation -->
+        <div class="profile-nav">
+            <div class="profile-nav-container">
+                <button class="profile-nav-btn active" data-tab="pins">
+                    <i class="fas fa-thumbtack"></i>
+                    Pins
+                </button>
+                <button class="profile-nav-btn" data-tab="collections">
+                    <i class="fas fa-folder"></i>
+                    Collections
+                </button>
+                <button class="profile-nav-btn" data-tab="saved">
+                    <i class="fas fa-bookmark"></i>
+                    Saved
+                </button>
+                <button class="profile-nav-btn" data-tab="likes">
+                    <i class="fas fa-heart"></i>
+                    Likes
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Content Tabs -->
+        <div class="profile-tabs">
+            <!-- Pins Tab -->
+            <div class="profile-tab-content active" id="pins-tab">
+                <div class="tab-header">
+                    <h2>Your Pins</h2>
+                    <button class="btn btn-primary" onclick="window.location.href='upload.html'">
+                        <i class="fas fa-plus"></i>
+                        Create Pin
+                    </button>
+                </div>
+                <div class="masonry-container" id="user-pins">
+                    <!-- User pins will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Collections Tab -->
+            <div class="profile-tab-content" id="collections-tab">
+                <div class="tab-header">
+                    <h2>Your Collections</h2>
+                    <button class="btn btn-primary" onclick="openCreateCollectionModal()">
+                        <i class="fas fa-plus"></i>
+                        New Collection
+                    </button>
+                </div>
+                <div class="collections-grid" id="user-collections">
+                    <!-- User collections will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Saved Tab -->
+            <div class="profile-tab-content" id="saved-tab">
+                <div class="tab-header">
+                    <h2>Saved Pins</h2>
+                    <span class="tab-subtitle">Pins you've saved for later</span>
+                </div>
+                <div class="masonry-container" id="saved-pins">
+                    <!-- Saved pins will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Likes Tab -->
+            <div class="profile-tab-content" id="likes-tab">
+                <div class="tab-header">
+                    <h2>Liked Pins</h2>
+                    <span class="tab-subtitle">Pins you've liked</span>
+                </div>
+                <div class="masonry-container" id="liked-pins">
+                    <!-- Liked pins will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="edit-profile-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeEditProfileModal()">&times;</span>
+            <div class="modal-header">
+                <h3>Edit Profile</h3>
+            </div>
+            <div class="modal-body">
+                <form id="edit-profile-form">
+                    <div class="form-group">
+                        <label for="edit-name">Name</label>
+                        <input type="text" id="edit-name" name="name" class="form-input" value="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-bio">Bio</label>
+                        <textarea id="edit-bio" name="bio" class="form-textarea" rows="4">Creative soul sharing beautiful moments and inspiration ✨</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-website">Website</label>
+                        <input type="url" id="edit-website" name="website" class="form-input" placeholder="https://yourwebsite.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-location">Location</label>
+                        <input type="text" id="edit-location" name="location" class="form-input" placeholder="Your location">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeEditProfileModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Collection Modal -->
+    <div class="modal" id="create-collection-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCreateCollectionModal()">&times;</span>
+            <div class="modal-header">
+                <h3>Create New Collection</h3>
+            </div>
+            <div class="modal-body">
+                <form id="create-collection-form">
+                    <div class="form-group">
+                        <label for="collection-name">Collection Name</label>
+                        <input type="text" id="collection-name" name="name" class="form-input" placeholder="Enter collection name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="collection-description">Description</label>
+                        <textarea id="collection-description" name="description" class="form-textarea" rows="3" placeholder="Describe your collection..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="collection-private" name="private">
+                            <span class="checkmark"></span>
+                            Keep this collection private
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreateCollectionModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Collection</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Profile page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeProfilePage();
+        });
+
+        function initializeProfilePage() {
+            // Load user profile data
+            loadUserProfile();
+            
+            // Initialize tab navigation
+            initializeProfileTabs();
+            
+            // Load initial content
+            loadUserPins();
+            
+            // Initialize event listeners
+            initializeProfileListeners();
+        }
+
+        function initializeProfileListeners() {
+            // Profile tabs
+            document.querySelectorAll('.profile-nav-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabName = this.dataset.tab;
+                    switchProfileTab(tabName);
+                });
+            });
+
+            // Edit profile form
+            document.getElementById('edit-profile-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveProfileChanges();
+            });
+
+            // Create collection form
+            document.getElementById('create-collection-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createNewCollection();
+            });
+        }
+
+        function loadUserProfile() {
+            // Load user data from localStorage or API
+            const userData = JSON.parse(localStorage.getItem('userData')) || {
+                name: 'Your Name',
+                bio: 'Creative soul sharing beautiful moments and inspiration ✨',
+                website: '',
+                location: '',
+                pinsCount: 42,
+                followersCount: 1243,
+                followingCount: 567
+            };
+
+            document.getElementById('profile-name').textContent = userData.name;
+            document.getElementById('profile-bio').textContent = userData.bio;
+            document.getElementById('pins-count').textContent = userData.pinsCount;
+            document.getElementById('followers-count').textContent = userData.followersCount;
+            document.getElementById('following-count').textContent = userData.followingCount;
+
+            // Update form values
+            document.getElementById('edit-name').value = userData.name;
+            document.getElementById('edit-bio').value = userData.bio;
+            document.getElementById('edit-website').value = userData.website || '';
+            document.getElementById('edit-location').value = userData.location || '';
+        }
+
+        function initializeProfileTabs() {
+            // Set initial active tab
+            switchProfileTab('pins');
+        }
+
+        function switchProfileTab(tabName) {
+            // Update navigation buttons
+            document.querySelectorAll('.profile-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+            // Update content tabs
+            document.querySelectorAll('.profile-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+
+            // Load tab content
+            switch(tabName) {
+                case 'pins':
+                    loadUserPins();
+                    break;
+                case 'collections':
+                    loadUserCollections();
+                    break;
+                case 'saved':
+                    loadSavedPins();
+                    break;
+                case 'likes':
+                    loadLikedPins();
+                    break;
+            }
+        }
+
+        function loadUserPins() {
+            const container = document.getElementById('user-pins');
+            container.innerHTML = '';
+
+            // Get user pins (simulate with sample data)
+            const userPins = generateUserPins();
+            
+            userPins.forEach(pin => {
+                const pinElement = createPinElement(pin);
+                container.appendChild(pinElement);
+            });
+        }
+
+        function loadUserCollections() {
+            const container = document.getElementById('user-collections');
+            container.innerHTML = '';
+
+            // Get user collections
+            const collections = generateUserCollections();
+            
+            collections.forEach(collection => {
+                const collectionElement = createCollectionElement(collection);
+                container.appendChild(collectionElement);
+            });
+        }
+
+        function loadSavedPins() {
+            const container = document.getElementById('saved-pins');
+            container.innerHTML = '';
+
+            const savedPins = JSON.parse(localStorage.getItem('savedPins')) || [];
+            const allPins = window.AestheticApp ? window.AestheticApp.pins() : [];
+            
+            const savedPinData = allPins.filter(pin => savedPins.includes(pin.id));
+            
+            if (savedPinData.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>No saved pins yet</h3>
+                        <p>Save pins you love to find them easily later</p>
+                        <button class="btn btn-primary" onclick="window.location.href='index.html'">
+                            Explore Pins
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            savedPinData.forEach(pin => {
+                const pinElement = createPinElement(pin);
+                container.appendChild(pinElement);
+            });
+        }
+
+        function loadLikedPins() {
+            const container = document.getElementById('liked-pins');
+            container.innerHTML = '';
+
+            // Simulate liked pins
+            const likedPins = generateLikedPins();
+            
+            likedPins.forEach(pin => {
+                const pinElement = createPinElement(pin);
+                container.appendChild(pinElement);
+            });
+        }
+
+        function generateUserPins() {
+            // Generate sample user pins
+            return [
+                {
+                    id: 101,
+                    title: "My Aesthetic Bedroom Setup",
+                    description: "Finally finished decorating my bedroom with this minimalist aesthetic!",
+                    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkZGNUU2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNGNUU2RDMiLz4KPHJlY3QgeD0iMTAwIiB5PSIyMDAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRTZFNkZBIi8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMwMCIgcj0iMjAiIGZpbGw9IiNGRkM0QzQiLz4KPHRleHQgeD0iMTUwIiB5PSIzNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2Qzc1N0QiIGZvbnQtZmFtaWx5PSJJbnRlciIgZm9udC1zaXplPSIxNiI+TXkgQmVkcm9vbTwvdGV4dD4KPC9zdmc+Cg==",
+                    tags: ['bedroom', 'aesthetic', 'minimalist', 'decor'],
+                    category: 'aesthetic',
+                    user: {
+                        id: 'user123',
+                        name: 'You',
+                        avatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMTAgMzBjMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMHMxMCA0LjQ3NyAxMCAxMHYySDEweiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K',
+                        followers: 1243
+                    },
+                    likes: 89,
+                    saves: 45,
+                    sourceUrl: 'https://example.com/my-bedroom'
+                },
+                {
+                    id: 102,
+                    title: "Coffee Shop Vibes",
+                    description: "Found this cozy corner at my favorite local coffee shop ☕",
+                    image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkZGNUU2Ii8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iNDAiIGZpbGw9IiNGRkM0QzQiLz4KPHJlY3QgeD0iMTAwIiB5PSIxNDAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjVFNkQzIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjIwMCIgcj0iMTUiIGZpbGw9IiNDNEY0REQiLz4KPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxNSIgZmlsbD0iI0M0RjRERCIvPgo8dGV4dCB4PSIxNTAiIHk9IjI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzZDNzU3RCIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE2Ij5Db2ZmZWUgU2hvcDwvdGV4dD4KPC9zdmc+Cg==",
+                    tags: ['coffee', 'cozy', 'cafe', 'aesthetic'],
+                    category: 'aesthetic',
+                    user: {
+                        id: 'user123',
+                        name: 'You',
+                        avatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRkI3QzUiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNiIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNMTAgMzBjMC01LjUyMyA0LjQ3Ny0xMCAxMC0xMHMxMCA0LjQ3NyAxMCAxMHYySDEweiIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K',
+                        followers: 1243
+                    },
+                    likes: 124,
+                    saves: 67,
+                    sourceUrl: 'https://example.com/coffee-shop'
+                }
+            ];
+        }
+
+        function generateUserCollections() {
+            return [
+                {
+                    id: 1,
+                    name: "Dream Home",
+                    description: "Interior design inspiration for my future home",
+                    pinCount: 23,
+                    isPrivate: false,
+                    coverImage: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRkZGNUU2Ii8+CjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI0Y1RTZEMyIvPgo8cmVjdCB4PSI1MCIgeT0iMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjRTZFNkZBIi8+Cjwvc3ZnPgo=",
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    name: "Fashion Inspo",
+                    description: "Style ideas and outfit inspirations",
+                    pinCount: 15,
+                    isPrivate: false,
+                    coverImage: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRkZDNEM0Ii8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjUwIiByPSIzMCIgZmlsbD0iI0ZGRjVFNiIvPgo8cmVjdCB4PSI3MCIgeT0iODAiIHdpZHRoPSI2MCIgaGVpZ2h0PSI1MCIgZmlsbD0iI0Y1RTZEMyIvPgo8L3N2Zz4=",
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: 3,
+                    name: "Travel Bucket List",
+                    description: "Places I want to visit someday",
+                    pinCount: 31,
+                    isPrivate: true,
+                    coverImage: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjQjVEOEZGIi8+CjxjaXJjbGUgY3g9IjE2MCIgY3k9IjMwIiByPSIyMCIgZmlsbD0iI0ZGRjVFNiIvPgo8cmVjdCB4PSIwIiB5PSIxMDAiIHdpZHRoPSIyMDAiIGhlaWdodD0iNTAiIGZpbGw9IiNDNEY0REQiLz4KPC9zdmc+",
+                    createdAt: new Date().toISOString()
+                }
+            ];
+        }
+
+        function generateLikedPins() {
+            // Return some sample liked pins
+            const allPins = window.AestheticApp ? window.AestheticApp.pins() : [];
+            return allPins.slice(0, 3);
+        }
+
+        function createCollectionElement(collection) {
+            const collectionCard = document.createElement('div');
+            collectionCard.className = 'collection-card';
+            
+            collectionCard.innerHTML = `
+                <div class="collection-cover">
+                    <img src="${collection.coverImage}" alt="${collection.name}">
+                    ${collection.isPrivate ? '<i class="fas fa-lock collection-private"></i>' : ''}
+                </div>
+                <div class="collection-info">
+                    <h3>${collection.name}</h3>
+                    <p>${collection.description}</p>
+                    <span class="collection-count">${collection.pinCount} pins</span>
+                </div>
+                <div class="collection-actions">
+                    <button class="btn btn-sm btn-secondary" onclick="editCollection(${collection.id})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-secondary" onclick="deleteCollection(${collection.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            return collectionCard;
+        }
+
+        // Create pin element function (reused from main script)
+        function createPinElement(pin) {
+            const pinCard = document.createElement('div');
+            pinCard.className = 'pin-card fade-in';
+            pinCard.setAttribute('data-pin-id', pin.id);
+            pinCard.setAttribute('data-category', pin.category);
+            
+            const savedPins = JSON.parse(localStorage.getItem('savedPins')) || [];
+            const isSaved = savedPins.includes(pin.id);
+            const saveButtonClass = isSaved ? 'saved' : '';
+            
+            pinCard.innerHTML = `
+                <div class="pin-image-container">
+                    <img src="${pin.image}" alt="${pin.title}" class="pin-image">
+                    <div class="pin-overlay">
+                        <div class="pin-actions">
+                            <button class="pin-action save-btn ${saveButtonClass}" onclick="toggleSavePin(${pin.id})">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                            <button class="pin-action" onclick="sharePin(${pin.id})">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="pin-action" onclick="deletePin(${pin.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pin-info">
+                    <h3 class="pin-title">${pin.title}</h3>
+                    <p class="pin-description">${pin.description}</p>
+                    <div class="pin-tags">
+                        ${pin.tags.map(tag => `<span class="pin-tag">${tag}</span>`).join('')}
+                    </div>
+                    <div class="pin-stats">
+                        <span><i class="fas fa-heart"></i> ${pin.likes}</span>
+                        <span><i class="fas fa-bookmark"></i> ${pin.saves}</span>
+                    </div>
+                </div>
+            `;
+            
+            return pinCard;
+        }
+
+        // Modal functions
+        function openEditProfileModal() {
+            document.getElementById('edit-profile-modal').style.display = 'block';
+        }
+
+        function closeEditProfileModal() {
+            document.getElementById('edit-profile-modal').style.display = 'none';
+        }
+
+        function openCreateCollectionModal() {
+            document.getElementById('create-collection-modal').style.display = 'block';
+        }
+
+        function closeCreateCollectionModal() {
+            document.getElementById('create-collection-modal').style.display = 'none';
+        }
+
+        function saveProfileChanges() {
+            const formData = new FormData(document.getElementById('edit-profile-form'));
+            const userData = {
+                name: formData.get('name'),
+                bio: formData.get('bio'),
+                website: formData.get('website'),
+                location: formData.get('location'),
+                pinsCount: parseInt(document.getElementById('pins-count').textContent),
+                followersCount: parseInt(document.getElementById('followers-count').textContent),
+                followingCount: parseInt(document.getElementById('following-count').textContent)
+            };
+
+            // Save to localStorage
+            localStorage.setItem('userData', JSON.stringify(userData));
+            
+            // Update UI
+            document.getElementById('profile-name').textContent = userData.name;
+            document.getElementById('profile-bio').textContent = userData.bio;
+            
+            closeEditProfileModal();
+            showNotification('Profile updated successfully!', 'success');
+        }
+
+        function createNewCollection() {
+            const formData = new FormData(document.getElementById('create-collection-form'));
+            const collectionData = {
+                id: Date.now(),
+                name: formData.get('name'),
+                description: formData.get('description'),
+                isPrivate: formData.get('private') === 'on',
+                pinCount: 0,
+                coverImage: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRkZGNUU2Ii8+CjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI0Y1RTZEMyIvPgo8cmVjdCB4PSI1MCIgeT0iMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjRTZFNkZBIi8+Cjwvc3ZnPgo=",
+                createdAt: new Date().toISOString()
+            };
+
+            // Save collection (in real app, this would be an API call)
+            const collections = JSON.parse(localStorage.getItem('userCollections')) || [];
+            collections.push(collectionData);
+            localStorage.setItem('userCollections', JSON.stringify(collections));
+            
+            // Refresh collections tab
+            loadUserCollections();
+            
+            closeCreateCollectionModal();
+            showNotification('Collection created successfully!', 'success');
+        }
+
+        function shareProfile() {
+            const shareUrl = `${window.location.origin}/profile.html`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out my profile on Aesthetic',
+                    url: shareUrl
+                });
+            } else {
+                navigator.clipboard.writeText(shareUrl);
+                showNotification('Profile link copied to clipboard!', 'success');
+            }
+        }
+
+        function deletePin(pinId) {
+            if (confirm('Are you sure you want to delete this pin?')) {
+                // Remove pin from UI
+                const pinElement = document.querySelector(`[data-pin-id="${pinId}"]`);
+                if (pinElement) {
+                    pinElement.remove();
+                }
+                showNotification('Pin deleted successfully', 'success');
+            }
+        }
+
+        function editCollection(collectionId) {
+            showNotification('Collection editing feature coming soon!', 'info');
+        }
+
+        function deleteCollection(collectionId) {
+            if (confirm('Are you sure you want to delete this collection?')) {
+                showNotification('Collection deleted successfully', 'success');
+                loadUserCollections();
+            }
+        }
+
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            if (window.AestheticApp && window.AestheticApp.showNotification) {
+                window.AestheticApp.showNotification(message, type);
+            } else {
+                alert(message);
+            }
+        }
+    </script>
+
+    <style>
+        /* Profile page specific styles */
+        .profile-content {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-pink), var(--accent-rose));
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            color: white;
+        }
+
+        .profile-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2xl);
+        }
+
+        .profile-avatar-large {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-avatar-large img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .edit-avatar-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            box-shadow: var(--shadow-md);
+        }
+
+        .edit-avatar-btn:hover {
+            background: var(--accent-rose);
+            transform: scale(1.1);
+        }
+
+        .profile-info h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .profile-info p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.9;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: var(--spacing-2xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .profile-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray);
+            position: sticky;
+            top: 70px;
+            z-index: 998;
+        }
+
+        .profile-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: var(--spacing-lg);
+            padding: 0 var(--spacing-lg);
+        }
+
+        .profile-nav-btn {
+            background: none;
+            border: none;
+            padding: var(--spacing-lg) var(--spacing-md);
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            border-bottom: 3px solid transparent;
+        }
+
+        .profile-nav-btn:hover,
+        .profile-nav-btn.active {
+            color: var(--primary-pink);
+            border-bottom-color: var(--primary-pink);
+        }
+
+        .profile-tabs {
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-tab-content {
+            display: none;
+        }
+
+        .profile-tab-content.active {
+            display: block;
+        }
+
+        .tab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .tab-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tab-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-left: var(--spacing-md);
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .collection-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition-medium);
+            position: relative;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .collection-cover {
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .collection-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .collection-private {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-md);
+            font-size: 0.8rem;
+        }
+
+        .collection-info {
+            padding: var(--spacing-lg);
+        }
+
+        .collection-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .collection-info p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.9rem;
+        }
+
+        .collection-count {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .collection-actions {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            display: flex;
+            gap: var(--spacing-sm);
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .collection-card:hover .collection-actions {
+            opacity: 1;
+        }
+
+        .btn-sm {
+            padding: var(--spacing-sm);
+            font-size: 0.8rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--primary-pink);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        .empty-state p {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .pin-stats {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .pin-stats i {
+            margin-right: var(--spacing-xs);
+        }
+
+        /* Modal styles */
+        .modal-header {
+            padding: var(--spacing-xl) var(--spacing-xl) 0;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 2px solid var(--gray);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 3px rgba(255, 183, 197, 0.1);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        @media (max-width: 768px) {
+            .profile-header-container {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--spacing-lg);
+            }
+
+            .profile-info h1 {
+                font-size: 2rem;
+            }
+
+            .profile-stats {
+                justify-content: center;
+            }
+
+            .profile-nav-container {
+                overflow-x: auto;
+                padding: 0 var(--spacing-md);
+            }
+
+            .profile-nav-btn {
+                white-space: nowrap;
+            }
+
+            .tab-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-md);
+            }
+
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
